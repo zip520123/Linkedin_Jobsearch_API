@@ -1,0 +1,17 @@
+{
+  "name": "auto-jobs-apply",
+  "version": "1.0.0",
+  "description": "LinkedIn jobs API workflow and automation",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test-health.js",
+    "search": "node search-jobs.js",
+    "search-cv": "node search-jobs-cv.js"
+  },
+  "keywords": ["linkedin", "jobs", "automation"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "linkedin-jobs-api": "^1.0.7"
+  }
+}

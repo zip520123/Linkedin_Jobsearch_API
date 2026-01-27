@@ -1,0 +1,53 @@
+H S I A N G - L I N ( R A I N ) , T S A I
+zip520123@gmail.com | linkedin.com/in/zip520123 | github.com/zip520123
+Work Permit: Eligible for UK Skilled Worker Visa sponsorship
+PROFILE
+Senior iOS Engineer with 9 years of experience architecting scalable mobile applications for 3M+
+active users. I leverage AI tools to maximize development speed and quality while choosing the right
+architecture. Proven track record of accelerating feature delivery by 10x through team mentorship and
+cross-functional leadership. Unique "Full-Stack" perspective with fluency in AWS and Node.js, bridging
+the gap between mobile and platform teams to ensure seamless API integration.
+SKILLS
+• Core iOS: Swift, Objective-C, Concurrency (async/await, Actors), Memory Management (ARC/
+Instruments), Auto Layout, Core Data
+• Architecture: MVVM, VIPER, MVC, MVVM-C, Clean Architecture, Dependency Injection (DI)
+• Technologies: RxSwift, UIKit, SwiftUI, Fastlane, CI/CD, XCTest, Unit/UI Testing, CocoaPods, AWS,
+GCP, React.js, Git, Firebase
+• Development Practices: Test Driven Development (TDD), Behavior Driven development (BDD),
+CocoaPods, Functional Programming(FP), Functional Reactive Programming(FRP), CI/CD
+• Backend/Web: JavaScript (ES6), TypeScript, Python, HTML5, PHP
+EXPERIENCE
+Software Engineer | Costa Coffee, part of the CocaCola, London, UK — (2021–Present)
+• Scalability & Performance: Led architectural design for an extensible iOS app using SOLID principles
+and TDD, increasing development efficiency by 13.2% YoY and supporting 3M MAUs.
+• Code Quality & Stability: Refactored legacy code, eliminating Ambient Context anti-patterns and
+global singletons, reducing CI/CD pipeline crashes by 79%.
+• Leadership & Mentorship: Mentored junior developers through code reviews and established best
+practices for BDD and Unit Testing, improving team efficiency and code maintainability, testability.
+• Cross-Team Collaboration: Coordinated large-scale projects with iOS, Android, Data Analysis, and
+Backend teams for seamless integration and timely delivery.
+• Disaster Recovery: Used TDD to debug and resolve post-release payment flow issues quickly,
+ensuring minimal user disruption.
+iOS Developer | Freelance, London, UK (2019–2021)
+• Built GingerBeer, a high-performance photo browser with AirDrop sharing & cache management.
+• Used TDD to deliver high-quality code increased build speed by 30% and increased test coverage
+by 50%.
+iOS Developer | PressPlay, Taipei, Taiwan (2019)
+• The biggest educational content platform and creator subscription service provider in Taiwan.
+• Developed a new landing page using RxSwift & AsyncDisplayKit, reducing UI latency by 30% and
+boosting user engagement by 20%.
+• Implemented a multi-threaded MVVM architecture, increasing mDAU by 10% and company profits by
+30%.
+• Set up Fastlane automation, speeding up delivery & testing by 30%.
+Senior Engineer | NewSoft T.C., Taiwan (2015–2019)
+• Golden Bell App: Led development of Taiwan’s top free app during the Golden Bell event, handling
+3,000+ concurrent users via real-time socket communication.
+• Circlefit: Built a Bluetooth-enabled fitness app with localization for 20+ languages, ensuring global
+usability.
+Co-Founder & Lead Full-Stack Engineer | Fabricycle (2018–2019)
+• Architected and built the end-to-end full stack using AWS (EC2, S3) and Firebase, designing RESTful
+APIs that powered the mobile and web clients.
+EDUCATION
+• MSc in Computer Science | TungHai University, Taiwan (2013–2015)
+• BSc in Information Technology | Takming University of Science and Technology, Taiwan
+• Language: English (Working proficiency), Mandarin (Native)
