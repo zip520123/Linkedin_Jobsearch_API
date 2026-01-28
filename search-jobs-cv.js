@@ -208,7 +208,7 @@ class CVBasedJobSearch {
     try {
       const jobs = await this.runAllSearches();
       this.displayJobs(jobs, 30); // Show top 30 jobs
-      await this.saveToFile(jobs);
+      // await this.saveToFile(jobs);
       await this.saveToCSV(jobs); // Save to CSV with date as filename
 
       return jobs;
