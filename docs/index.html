@@ -29,45 +29,119 @@
 
         <!-- Settings / Auth -->
         <div class="bg-white rounded-lg shadow p-6 mb-6">
-            <h2 class="text-lg font-semibold mb-4 border-b pb-2">Configuration</h2>
-            
-            <div class="mb-4">
-                <label class="block text-sm font-medium text-gray-700 mb-1">GitHub Personal Access Token (PAT)</label>
-                <input type="password" v-model="pat" placeholder="ghp_..." class="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500 outline-none">
-                <p class="text-xs text-gray-500 mt-1">
-                    Required to trigger the search. Must have <code>workflow</code> scope. stored locally in browser.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Config Editor -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Search Configuration (JSON)</label>
-                    <textarea v-model="configStr" class="w-full h-64 p-3 border rounded font-mono text-xs bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none"></textarea>
-                </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 
-                <!-- Status & Actions -->
-                <div class="flex flex-col justify-between">
-                    <div class="bg-blue-50 p-4 rounded text-sm text-blue-800 mb-4">
-                        <h3 class="font-bold mb-2">How it works</h3>
-                        <ol class="list-decimal pl-4 space-y-1">
-                            <li>Enter your GitHub PAT (Settings -> Developer Settings -> Tokens).</li>
-                            <li>Modify the JSON config (Keywords, Locations).</li>
-                            <li>Click "Run Search Workflow".</li>
-                            <li>Wait ~1-2 minutes for the Action to finish.</li>
-                            <li>Click "Refresh Data" to see new results.</li>
-                        </ol>
+                <!-- Left Column: Config Editor -->
+                <div class="lg:col-span-2">
+                    <div class="flex justify-between items-center mb-4 border-b pb-2">
+                        <h2 class="text-lg font-semibold">Search Configuration</h2>
+                        <!-- Tabs -->
+                        <div class="flex bg-gray-100 p-1 rounded">
+                            <button @click="toggleMode('visual')" 
+                                :class="`px-3 py-1 text-sm rounded ${mode === 'visual' ? 'bg-white shadow text-blue-600 font-bold' : 'text-gray-500'}`">
+                                Visual Editor
+                            </button>
+                            <button @click="toggleMode('json')" 
+                                :class="`px-3 py-1 text-sm rounded ${mode === 'json' ? 'bg-white shadow text-blue-600 font-bold' : 'text-gray-500'}`">
+                                Raw JSON
+                            </button>
+                        </div>
                     </div>
 
-                    <button @click="triggerSearch" :disabled="loading || !pat" 
-                        class="w-full py-3 bg-blue-600 text-white rounded font-semibold hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition">
-                        <span v-if="loading"><i class="fas fa-spinner fa-spin"></i> Triggering...</span>
-                        <span v-else><i class="fas fa-play"></i> Run Search Workflow</span>
-                    </button>
-                    <p v-if="message" :class="`mt-2 text-center text-sm ${msgType === 'error' ? 'text-red-600' : 'text-green-600'}`">
-                        {{ message }}
-                        <a v-if="repoUrl && msgType === 'success'" :href="repoUrl" target="_blank" class="underline font-bold ml-1">View Run</a>
-                    </p>
+                    <!-- VISUAL EDITOR -->
+                    <div v-if="mode === 'visual'">
+                        <div class="space-y-4">
+                            <!-- Search Items -->
+                            <div v-for="(search, index) in config.searches" :key="index" class="border rounded-lg p-4 bg-gray-50 relative group">
+                                <button @click="removeSearch(index)" class="absolute top-2 right-2 text-gray-400 hover:text-red-500" title="Remove Search">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                                    <div>
+                                        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Keywords</label>
+                                        <input type="text" v-model="search.keyword" placeholder="e.g. iOS Developer" class="w-full p-2 border rounded text-sm focus:ring-1 focus:ring-blue-500 outline-none">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Location</label>
+                                        <input type="text" v-model="search.location" placeholder="e.g. London, UK" class="w-full p-2 border rounded text-sm focus:ring-1 focus:ring-blue-500 outline-none">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Time</label>
+                                        <select v-model="search.dateSincePosted" class="w-full p-2 border rounded text-sm bg-white">
+                                            <option value="24hr">Past 24 Hours</option>
+                                            <option value="past week">Past Week</option>
+                                            <option value="past month">Past Month</option>
+                                            <option value="">Any Time</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Internal Name</label>
+                                        <input type="text" v-model="search.name" class="w-full p-2 border rounded text-sm text-gray-500 bg-gray-100">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button @click="addSearch" class="w-full py-3 border-2 border-dashed border-gray-300 rounded text-gray-500 hover:border-blue-500 hover:text-blue-500 transition font-medium">
+                                <i class="fas fa-plus-circle"></i> Add Another Search Location
+                            </button>
+                        </div>
+                        
+                        <!-- Mini Filters UI -->
+                        <div class="mt-6 border-t pt-4">
+                            <h3 class="text-sm font-bold text-gray-600 mb-2">Filters</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs text-gray-500 mb-1">Title must contain (comma separated)</label>
+                                    <input type="text" :value="config.filters.titleKeywords.join(', ')" @input="config.filters.titleKeywords = $event.target.value.split(',').map(s=>s.trim())" class="w-full p-2 border rounded text-sm">
+                                </div>
+                                <div>
+                                    <label class="block text-xs text-gray-500 mb-1">Preferred Skills (for sorting)</label>
+                                    <input type="text" :value="config.filters.preferredKeywords.join(', ')" @input="config.filters.preferredKeywords = $event.target.value.split(',').map(s=>s.trim())" class="w-full p-2 border rounded text-sm">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- JSON EDITOR -->
+                    <div v-if="mode === 'json'">
+                        <textarea v-model="configJsonStr" class="w-full h-96 p-3 border rounded font-mono text-xs bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none"></textarea>
+                    </div>
+                </div>
+
+                <!-- Right Column: Actions -->
+                <div>
+                    <div class="bg-gray-50 p-4 rounded-lg border">
+                        <h2 class="font-bold text-gray-700 mb-4">Run Search</h2>
+                        
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">GitHub PAT Token</label>
+                            <input type="password" v-model="pat" placeholder="ghp_..." class="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500 outline-none">
+                            <p class="text-xs text-gray-500 mt-1">Requires <code>workflow</code> scope.</p>
+                        </div>
+
+                        <button @click="triggerSearch" :disabled="loading || !pat" 
+                            class="w-full py-3 bg-blue-600 text-white rounded font-semibold hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition shadow-sm">
+                            <span v-if="loading"><i class="fas fa-spinner fa-spin"></i> Triggering...</span>
+                            <span v-else><i class="fas fa-rocket"></i> Run Workflow</span>
+                        </button>
+                        
+                        <div v-if="message" :class="`mt-3 p-3 rounded text-sm text-center ${msgType === 'error' ? 'bg-red-50 text-red-600' : 'bg-green-50 text-green-700'}`">
+                            {{ message }}
+                            <div v-if="repoUrl && msgType === 'success'" class="mt-1">
+                                <a :href="repoUrl" target="_blank" class="underline font-bold">View Progress <i class="fas fa-external-link-alt"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 text-xs text-gray-400">
+                            <p class="mb-2"><strong>Tips:</strong></p>
+                            <ul class="list-disc pl-4 space-y-1">
+                                <li>Use "Past 24 Hours" for daily checks.</li>
+                                <li>Specific cities (e.g. "London") work better than countries.</li>
+                                <li>Add multiple searches to cover different regions.</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -83,23 +157,23 @@
                 <table class="w-full text-left border-collapse">
                     <thead>
                         <tr class="bg-gray-100 text-gray-600 text-sm uppercase">
-                            <th class="p-3 border-b">Score</th>
+                            <th class="p-3 border-b w-16 text-center">Score</th>
                             <th class="p-3 border-b">Role</th>
                             <th class="p-3 border-b">Company</th>
                             <th class="p-3 border-b">Location</th>
                             <th class="p-3 border-b">Posted</th>
-                            <th class="p-3 border-b">Action</th>
+                            <th class="p-3 border-b text-right">Action</th>
                         </tr>
                     </thead>
                     <tbody class="text-sm divide-y">
                         <tr v-for="job in jobs" :key="job.jobUrl" class="hover:bg-blue-50 transition">
-                            <td class="p-3 font-mono text-blue-600 font-bold">{{ job.relevanceScore }}</td>
-                            <td class="p-3 font-medium">{{ job.position }}</td>
+                            <td class="p-3 font-mono text-blue-600 font-bold text-center text-lg">{{ job.relevanceScore }}</td>
+                            <td class="p-3 font-medium text-base">{{ job.position }}</td>
                             <td class="p-3 text-gray-600">{{ job.company }}</td>
                             <td class="p-3 text-gray-500">{{ job.location }}</td>
-                            <td class="p-3 text-gray-500">{{ job.agoTime || job.date }}</td>
-                            <td class="p-3">
-                                <a :href="job.jobUrl" target="_blank" class="text-blue-600 hover:text-blue-800 underline">Apply</a>
+                            <td class="p-3 text-gray-500 whitespace-nowrap">{{ job.agoTime || job.date }}</td>
+                            <td class="p-3 text-right">
+                                <a :href="job.jobUrl" target="_blank" class="px-3 py-1 bg-blue-100 text-blue-700 rounded hover:bg-blue-200">Apply</a>
                             </td>
                         </tr>
                         <tr v-if="jobs.length === 0">

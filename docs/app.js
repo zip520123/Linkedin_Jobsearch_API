@@ -1,4 +1,4 @@
-const { createApp, ref, onMounted, watch } = Vue;
+const { createApp, ref, onMounted, watch, computed } = Vue;
 
 createApp({
     setup() {
@@ -9,8 +9,9 @@ createApp({
         const jobs = ref([]);
         const generatedAt = ref('-');
         const repoUrl = ref('');
+        const mode = ref('visual'); // 'visual' or 'json'
 
-        // Default Config
+        // Default Config Object
         const defaultConfig = {
             searches: [
                 {
@@ -18,13 +19,6 @@ createApp({
                     keyword: 'iOS Developer',
                     location: 'London, United Kingdom',
                     dateSincePosted: '24hr',
-                    limit: '25'
-                },
-                {
-                    name: 'Swift Developer Remote',
-                    keyword: 'Swift Developer',
-                    location: 'Remote',
-                    dateSincePosted: 'past week',
                     limit: '25'
                 }
             ],
@@ -36,12 +30,45 @@ createApp({
             }
         };
 
-        const configStr = ref(JSON.stringify(defaultConfig, null, 2));
+        const config = ref(defaultConfig);
+        const configJsonStr = ref(JSON.stringify(defaultConfig, null, 2));
 
         // Save PAT to local storage
         watch(pat, (newVal) => {
             localStorage.setItem('github_pat', newVal);
         });
+
+        // Toggle between Visual and JSON modes
+        const toggleMode = (newMode) => {
+            if (newMode === 'json') {
+                // Visual -> JSON: Sync object to string
+                configJsonStr.value = JSON.stringify(config.value, null, 2);
+            } else {
+                // JSON -> Visual: Try to parse string to object
+                try {
+                    config.value = JSON.parse(configJsonStr.value);
+                } catch (e) {
+                    alert("Invalid JSON in the editor. Please fix errors before switching back to Visual mode.");
+                    return; // Abort switch
+                }
+            }
+            mode.value = newMode;
+        };
+
+        // UI Helpers for Visual Editor
+        const addSearch = () => {
+            config.value.searches.push({
+                name: 'New Search',
+                keyword: '',
+                location: '',
+                dateSincePosted: '24hr',
+                limit: '25'
+            });
+        };
+
+        const removeSearch = (index) => {
+            config.value.searches.splice(index, 1);
+        };
 
         // Load Results from JSON
         const loadResults = async () => {
@@ -57,7 +84,6 @@ createApp({
                 setTimeout(() => message.value = '', 3000);
             } catch (err) {
                 console.log(err);
-                // Don't show error on initial load if just empty
                 if (jobs.value.length > 0) {
                     message.value = 'Failed to refresh data';
                     msgType.value = 'error';
@@ -73,39 +99,32 @@ createApp({
             msgType.value = 'info';
 
             try {
-                // Parse repo info from current URL or default (requires user to be on the deployed site)
-                // For now, we assume the user might need to configure the repo name if not hosted on GH Pages of the repo
-                // But typically window.location.hostname contains 'github.io'.
-                // Format: <user>.github.io/<repo>
-                
                 let user = '';
                 let repo = '';
                 
                 const pathParts = window.location.pathname.split('/').filter(p => p);
-                // e.g. /my-repo/ or /
                 
                 if (window.location.hostname.includes('github.io')) {
                     user = window.location.hostname.split('.')[0];
                     repo = pathParts[0];
                 } else {
-                    // Fallback for local testing or custom domain - might fail without manual config
-                    // Let's prompt or error if we can't guess
-                     // For this specific user case:
-                     // The project is locally at /Users/hsiang-lin/unsync/AIProjects/jobs_search
-                     // We don't know the remote URL easily from JS.
-                     // But the user provided: https://github.com/zip520123/Linkedin_Jobsearch_API
                      user = 'zip520123';
                      repo = 'Linkedin_Jobsearch_API';
                 }
                 
                 repoUrl.value = `https://github.com/${user}/${repo}/actions`;
 
-                // Clean config
+                // Prepare Payload
                 let configPayload;
                 try {
-                     configPayload = JSON.stringify(JSON.parse(configStr.value)); // Minify
+                    if (mode.value === 'json') {
+                        // Validate JSON before sending
+                        configPayload = JSON.stringify(JSON.parse(configJsonStr.value));
+                    } else {
+                        configPayload = JSON.stringify(config.value);
+                    }
                 } catch (e) {
-                    throw new Error('Invalid JSON in config');
+                    throw new Error('Invalid Configuration JSON');
                 }
 
                 const url = `https://api.github.com/repos/${user}/${repo}/actions/workflows/job-search.yml/dispatches`;
@@ -117,7 +136,7 @@ createApp({
                         'Authorization': `token ${pat.value}`
                     },
                     body: JSON.stringify({
-                        ref: 'master', // or main
+                        ref: 'master', 
                         inputs: {
                             config: configPayload
                         }
@@ -146,13 +165,18 @@ createApp({
 
         return {
             pat,
-            configStr,
+            config,
+            configJsonStr,
+            mode,
             loading,
             message,
             msgType,
             jobs,
             generatedAt,
             repoUrl,
+            toggleMode,
+            addSearch,
+            removeSearch,
             triggerSearch,
             loadResults
         };
