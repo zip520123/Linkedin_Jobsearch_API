@@ -3,6 +3,7 @@ const { createApp, ref, onMounted, watch, computed } = Vue;
 createApp({
     setup() {
         const pat = ref(localStorage.getItem('github_pat') || '');
+        const branch = ref(localStorage.getItem('github_branch') || 'master');
         const loading = ref(false);
         const message = ref('');
         const msgType = ref('info');
@@ -169,9 +170,12 @@ createApp({
         const config = ref(defaultConfig);
         const configJsonStr = ref(JSON.stringify(defaultConfig, null, 2));
 
-        // Save PAT to local storage
+        // Save settings to local storage
         watch(pat, (newVal) => {
             localStorage.setItem('github_pat', newVal);
+        });
+        watch(branch, (newVal) => {
+            localStorage.setItem('github_branch', newVal);
         });
 
         // Toggle between Visual and JSON modes
@@ -272,7 +276,7 @@ createApp({
                         'Authorization': `token ${pat.value}`
                     },
                     body: JSON.stringify({
-                        ref: 'master', 
+                        ref: branch.value, 
                         inputs: {
                             config: configPayload
                         }
@@ -301,6 +305,7 @@ createApp({
 
         return {
             pat,
+            branch,
             config,
             configJsonStr,
             mode,
