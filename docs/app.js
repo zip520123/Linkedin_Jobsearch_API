@@ -8,6 +8,7 @@ createApp({
         const msgType = ref('info');
         const jobs = ref([]);
         const generatedAt = ref('-');
+        const repoUrl = ref('');
 
         // Default Config
         const defaultConfig = {
@@ -96,6 +97,8 @@ createApp({
                      user = 'zip520123';
                      repo = 'Linkedin_Jobsearch_API';
                 }
+                
+                repoUrl.value = `https://github.com/${user}/${repo}/actions`;
 
                 // Clean config
                 let configPayload;
@@ -114,7 +117,7 @@ createApp({
                         'Authorization': `token ${pat.value}`
                     },
                     body: JSON.stringify({
-                        ref: 'main', // or master
+                        ref: 'master', // or main
                         inputs: {
                             config: configPayload
                         }
@@ -149,6 +152,7 @@ createApp({
             msgType,
             jobs,
             generatedAt,
+            repoUrl,
             triggerSearch,
             loadResults
         };

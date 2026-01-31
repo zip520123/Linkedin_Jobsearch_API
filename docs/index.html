@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body class="bg-gray-100 min-h-screen font-sans text-gray-800">
-    <div id="app" class="container mx-auto px-4 py-8 max-w-5xl">
+    <div id="app" class="container mx-auto px-4 py-8 max-w-[95%]">
         <header class="mb-8 flex justify-between items-center">
             <div>
                 <h1 class="text-3xl font-bold text-blue-700">
@@ -66,6 +66,7 @@
                     </button>
                     <p v-if="message" :class="`mt-2 text-center text-sm ${msgType === 'error' ? 'text-red-600' : 'text-green-600'}`">
                         {{ message }}
+                        <a v-if="repoUrl && msgType === 'success'" :href="repoUrl" target="_blank" class="underline font-bold ml-1">View Run</a>
                     </p>
                 </div>
             </div>
