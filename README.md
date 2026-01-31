@@ -23,16 +23,8 @@ This will run a simple query and display results to verify the API is functionin
 
 ### Job Search
 
-Run the job search workflow:
-
 ```bash
-npm run search
-```
-
-Or use it directly:
-
-```bash
-node search-jobs.js
+node search-jobs-cv.js
 ```
 
 ### Programmatic Usage

@@ -14,7 +14,7 @@ module.exports = {
       dateSincePosted: '24hr',
       jobType: 'full time',
       remoteFilter: '',
-      experienceLevel: 'mid-senior level',
+      experienceLevel: 'senior',
       limit: '25',
       salary: ''
     },
@@ -25,18 +25,7 @@ module.exports = {
       dateSincePosted: '24hr',
       jobType: 'full time',
       remoteFilter: '',
-      experienceLevel: 'mid-senior level',
-      limit: '25',
-      salary: ''
-    },
-    {
-      name: 'Mobile Engineer - London',
-      keyword: 'Mobile Engineer',
-      location: 'London, United Kingdom',
-      dateSincePosted: '24hr',
-      jobType: 'full time',
-      remoteFilter: '',
-      experienceLevel: 'mid-senior level',
+      experienceLevel: 'senior',
       limit: '25',
       salary: ''
     },
@@ -49,7 +38,7 @@ module.exports = {
       dateSincePosted: '24hr',
       jobType: 'full time',
       remoteFilter: '',
-      experienceLevel: 'mid-senior level',
+      experienceLevel: 'senior',
       limit: '25',
       salary: ''
     },
@@ -60,18 +49,7 @@ module.exports = {
       dateSincePosted: '24hr',
       jobType: 'full time',
       remoteFilter: '',
-      experienceLevel: 'mid-senior level',
-      limit: '25',
-      salary: ''
-    },
-    {
-      name: 'Mobile Engineer - Amsterdam',
-      keyword: 'Mobile Engineer',
-      location: 'Amsterdam, Netherlands',
-      dateSincePosted: '24hr',
-      jobType: 'full time',
-      remoteFilter: '',
-      experienceLevel: 'mid-senior level',
+      experienceLevel: 'senior',
       limit: '25',
       salary: ''
     },
@@ -84,7 +62,7 @@ module.exports = {
       dateSincePosted: '24hr',
       jobType: 'full time',
       remoteFilter: '',
-      experienceLevel: 'mid-senior level',
+      experienceLevel: 'senior',
       limit: '25',
       salary: ''
     },
@@ -95,18 +73,7 @@ module.exports = {
       dateSincePosted: '24hr',
       jobType: 'full time',
       remoteFilter: '',
-      experienceLevel: 'mid-senior level',
-      limit: '25',
-      salary: ''
-    },
-    {
-      name: 'Mobile Engineer - Copenhagen',
-      keyword: 'Mobile Engineer',
-      location: 'Copenhagen, Denmark',
-      dateSincePosted: '24hr',
-      jobType: 'full time',
-      remoteFilter: '',
-      experienceLevel: 'mid-senior level',
+      experienceLevel: 'senior',
       limit: '25',
       salary: ''
     },
@@ -119,7 +86,7 @@ module.exports = {
       dateSincePosted: '24hr',
       jobType: 'full time',
       remoteFilter: '',
-      experienceLevel: 'mid-senior level',
+      experienceLevel: 'senior',
       limit: '25',
       salary: ''
     },
@@ -130,18 +97,7 @@ module.exports = {
       dateSincePosted: '24hr',
       jobType: 'full time',
       remoteFilter: '',
-      experienceLevel: 'mid-senior level',
-      limit: '25',
-      salary: ''
-    },
-    {
-      name: 'Mobile Engineer - Stockholm',
-      keyword: 'Mobile Engineer',
-      location: 'Stockholm, Sweden',
-      dateSincePosted: '24hr',
-      jobType: 'full time',
-      remoteFilter: '',
-      experienceLevel: 'mid-senior level',
+      experienceLevel: 'senior',
       limit: '25',
       salary: ''
     },
@@ -154,7 +110,7 @@ module.exports = {
       dateSincePosted: '24hr',
       jobType: 'full time',
       remoteFilter: '',
-      experienceLevel: 'mid-senior level',
+      experienceLevel: 'senior',
       limit: '25',
       salary: ''
     },
@@ -165,23 +121,12 @@ module.exports = {
       dateSincePosted: '24hr',
       jobType: 'full time',
       remoteFilter: '',
-      experienceLevel: 'mid-senior level',
-      limit: '25',
-      salary: ''
-    },
-    {
-      name: 'Mobile Engineer - Helsinki',
-      keyword: 'Mobile Engineer',
-      location: 'Helsinki, Finland',
-      dateSincePosted: '24hr',
-      jobType: 'full time',
-      remoteFilter: '',
-      experienceLevel: 'mid-senior level',
+      experienceLevel: 'senior',
       limit: '25',
       salary: ''
     },
 
-    // Poland searches
+    // Poland searches (commented out)
     // {
     //   name: 'Senior iOS Engineer - Poland',
     //   keyword: 'Senior iOS Engineer',
@@ -189,7 +134,7 @@ module.exports = {
     //   dateSincePosted: '24hr',
     //   jobType: 'full time',
     //   remoteFilter: '',
-    //   experienceLevel: 'mid-senior level',
+    //   experienceLevel: 'senior',
     //   limit: '25',
     //   salary: ''
     // },
@@ -200,7 +145,7 @@ module.exports = {
     //   dateSincePosted: '24hr',
     //   jobType: 'full time',
     //   remoteFilter: '',
-    //   experienceLevel: 'mid-senior level',
+    //   experienceLevel: 'senior',
     //   limit: '25',
     //   salary: ''
     // },
@@ -211,7 +156,7 @@ module.exports = {
     //   dateSincePosted: '24hr',
     //   jobType: 'full time',
     //   remoteFilter: '',
-    //   experienceLevel: 'mid-senior level',
+    //   experienceLevel: 'senior',
     //   limit: '25',
     //   salary: ''
     // },
@@ -224,7 +169,7 @@ module.exports = {
       dateSincePosted: '24hr',
       jobType: 'full time',
       remoteFilter: '',
-      experienceLevel: 'mid-senior level',
+      experienceLevel: 'senior',
       limit: '25',
       salary: ''
     },
@@ -235,18 +180,7 @@ module.exports = {
       dateSincePosted: '24hr',
       jobType: 'full time',
       remoteFilter: '',
-      experienceLevel: 'mid-senior level',
-      limit: '25',
-      salary: ''
-    },
-    {
-      name: 'Mobile Engineer - UAE',
-      keyword: 'Mobile Engineer',
-      location: 'United Arab Emirates',
-      dateSincePosted: '24hr',
-      jobType: 'full time',
-      remoteFilter: '',
-      experienceLevel: 'mid-senior level',
+      experienceLevel: 'senior',
       limit: '25',
       salary: ''
     }
@@ -257,10 +191,9 @@ module.exports = {
     // Must include at least one of these keywords in job title
     titleKeywords: [
       'ios',
-      'mobile',
-      'engineer',
-      'developer',
-      'software'
+      'swift',
+      'swiftui',
+      'uikit'
     ],
 
     // Exclude these companies (add any you don't want)
