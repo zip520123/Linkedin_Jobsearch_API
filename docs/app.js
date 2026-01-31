@@ -14,18 +14,154 @@ createApp({
         // Default Config Object
         const defaultConfig = {
             searches: [
+                // London searches
                 {
-                    name: 'iOS Developer London',
+                    name: 'Senior iOS Engineer - London',
+                    keyword: 'Senior iOS Engineer',
+                    location: 'London, United Kingdom',
+                    dateSincePosted: '24hr',
+                    jobType: 'full time',
+                    remoteFilter: '',
+                    experienceLevel: 'senior',
+                    limit: '25',
+                    salary: ''
+                },
+                {
+                    name: 'iOS Developer - London',
                     keyword: 'iOS Developer',
                     location: 'London, United Kingdom',
                     dateSincePosted: '24hr',
-                    limit: '25'
+                    jobType: 'full time',
+                    remoteFilter: '',
+                    experienceLevel: 'senior',
+                    limit: '25',
+                    salary: ''
+                },
+
+                // Amsterdam searches
+                {
+                    name: 'Senior iOS Engineer - Amsterdam',
+                    keyword: 'Senior iOS Engineer',
+                    location: 'Amsterdam, Netherlands',
+                    dateSincePosted: '24hr',
+                    jobType: 'full time',
+                    remoteFilter: '',
+                    experienceLevel: 'senior',
+                    limit: '25',
+                    salary: ''
+                },
+                {
+                    name: 'iOS Developer - Amsterdam',
+                    keyword: 'iOS Developer',
+                    location: 'Amsterdam, Netherlands',
+                    dateSincePosted: '24hr',
+                    jobType: 'full time',
+                    remoteFilter: '',
+                    experienceLevel: 'senior',
+                    limit: '25',
+                    salary: ''
+                },
+
+                // Copenhagen/Denmark searches
+                {
+                    name: 'Senior iOS Engineer - Copenhagen',
+                    keyword: 'Senior iOS Engineer',
+                    location: 'Copenhagen, Denmark',
+                    dateSincePosted: '24hr',
+                    jobType: 'full time',
+                    remoteFilter: '',
+                    experienceLevel: 'senior',
+                    limit: '25',
+                    salary: ''
+                },
+                {
+                    name: 'iOS Developer - Copenhagen',
+                    keyword: 'iOS Developer',
+                    location: 'Copenhagen, Denmark',
+                    dateSincePosted: '24hr',
+                    jobType: 'full time',
+                    remoteFilter: '',
+                    experienceLevel: 'senior',
+                    limit: '25',
+                    salary: ''
+                },
+
+                // Stockholm/Sweden searches
+                {
+                    name: 'Senior iOS Engineer - Stockholm',
+                    keyword: 'Senior iOS Engineer',
+                    location: 'Stockholm, Sweden',
+                    dateSincePosted: '24hr',
+                    jobType: 'full time',
+                    remoteFilter: '',
+                    experienceLevel: 'senior',
+                    limit: '25',
+                    salary: ''
+                },
+                {
+                    name: 'iOS Developer - Stockholm',
+                    keyword: 'iOS Developer',
+                    location: 'Stockholm, Sweden',
+                    dateSincePosted: '24hr',
+                    jobType: 'full time',
+                    remoteFilter: '',
+                    experienceLevel: 'senior',
+                    limit: '25',
+                    salary: ''
+                },
+
+                // Helsinki/Finland searches
+                {
+                    name: 'Senior iOS Engineer - Helsinki',
+                    keyword: 'Senior iOS Engineer',
+                    location: 'Helsinki, Finland',
+                    dateSincePosted: '24hr',
+                    jobType: 'full time',
+                    remoteFilter: '',
+                    experienceLevel: 'senior',
+                    limit: '25',
+                    salary: ''
+                },
+                {
+                    name: 'iOS Developer - Helsinki',
+                    keyword: 'iOS Developer',
+                    location: 'Helsinki, Finland',
+                    dateSincePosted: '24hr',
+                    jobType: 'full time',
+                    remoteFilter: '',
+                    experienceLevel: 'senior',
+                    limit: '25',
+                    salary: ''
+                },
+
+                // UAE searches
+                {
+                    name: 'Senior iOS Engineer - UAE',
+                    keyword: 'Senior iOS Engineer',
+                    location: 'United Arab Emirates',
+                    dateSincePosted: '24hr',
+                    jobType: 'full time',
+                    remoteFilter: '',
+                    experienceLevel: 'senior',
+                    limit: '25',
+                    salary: ''
+                },
+                {
+                    name: 'iOS Developer - UAE',
+                    keyword: 'iOS Developer',
+                    location: 'United Arab Emirates',
+                    dateSincePosted: '24hr',
+                    jobType: 'full time',
+                    remoteFilter: '',
+                    experienceLevel: 'senior',
+                    limit: '25',
+                    salary: ''
                 }
             ],
             filters: {
-                titleKeywords: ['ios', 'swift'],
+                titleKeywords: ['ios', 'swift', 'swiftui', 'uikit'],
                 excludeCompanies: [],
-                preferredKeywords: ['swiftui', 'combine', 'senior'],
+                preferredKeywords: ['swift', 'swiftui', 'uikit', 'mvvm', 'rxswift', 'combine', 'tdd', 'ci/cd', 'fastlane', 'senior', 'lead', 'architect'],
                 minSalary: 0
             }
         };
