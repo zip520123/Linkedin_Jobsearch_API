@@ -1,4 +1,4 @@
-# LinkedIn Jobs Auto Apply Workflow
+# LinkedIn Jobs api frontend
 
 A Node.js workflow for searching and filtering LinkedIn job listings using the [linkedin-jobs-api](https://github.com/VishwaGauravIn/linkedin-jobs-api).
 
