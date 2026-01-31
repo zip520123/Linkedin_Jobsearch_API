@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedIn Job Searcher</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gray-100 min-h-screen font-sans text-gray-800">
+    <div id="app" class="container mx-auto px-4 py-8 max-w-5xl">
+        <header class="mb-8 flex justify-between items-center">
+            <div>
+                <h1 class="text-3xl font-bold text-blue-700">
+                    <i class="fab fa-linkedin"></i> Job Search Automation
+                </h1>
+                <p class="text-gray-500 mt-1">Runs on GitHub Actions • Hosted on GitHub Pages</p>
+            </div>
+            <div class="flex gap-2">
+                <button @click="loadResults" class="px-4 py-2 bg-white border rounded hover:bg-gray-50 text-sm">
+                    <i class="fas fa-sync"></i> Refresh Data
+                </button>
+                <a href="data/latest.csv" download class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 text-sm flex items-center gap-2">
+                    <i class="fas fa-file-csv"></i> Download CSV
+                </a>
+            </div>
+        </header>
+
+        <!-- Settings / Auth -->
+        <div class="bg-white rounded-lg shadow p-6 mb-6">
+            <h2 class="text-lg font-semibold mb-4 border-b pb-2">Configuration</h2>
+            
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700 mb-1">GitHub Personal Access Token (PAT)</label>
+                <input type="password" v-model="pat" placeholder="ghp_..." class="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500 outline-none">
+                <p class="text-xs text-gray-500 mt-1">
+                    Required to trigger the search. Must have <code>workflow</code> scope. stored locally in browser.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Config Editor -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Search Configuration (JSON)</label>
+                    <textarea v-model="configStr" class="w-full h-64 p-3 border rounded font-mono text-xs bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none"></textarea>
+                </div>
+                
+                <!-- Status & Actions -->
+                <div class="flex flex-col justify-between">
+                    <div class="bg-blue-50 p-4 rounded text-sm text-blue-800 mb-4">
+                        <h3 class="font-bold mb-2">How it works</h3>
+                        <ol class="list-decimal pl-4 space-y-1">
+                            <li>Enter your GitHub PAT (Settings -> Developer Settings -> Tokens).</li>
+                            <li>Modify the JSON config (Keywords, Locations).</li>
+                            <li>Click "Run Search Workflow".</li>
+                            <li>Wait ~1-2 minutes for the Action to finish.</li>
+                            <li>Click "Refresh Data" to see new results.</li>
+                        </ol>
+                    </div>
+
+                    <button @click="triggerSearch" :disabled="loading || !pat" 
+                        class="w-full py-3 bg-blue-600 text-white rounded font-semibold hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition">
+                        <span v-if="loading"><i class="fas fa-spinner fa-spin"></i> Triggering...</span>
+                        <span v-else><i class="fas fa-play"></i> Run Search Workflow</span>
+                    </button>
+                    <p v-if="message" :class="`mt-2 text-center text-sm ${msgType === 'error' ? 'text-red-600' : 'text-green-600'}`">
+                        {{ message }}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Table -->
+        <div class="bg-white rounded-lg shadow overflow-hidden">
+            <div class="p-4 border-b bg-gray-50 flex justify-between items-center">
+                <h2 class="font-semibold text-gray-700">Results ({{ jobs.length }})</h2>
+                <span class="text-xs text-gray-400">Last Generated: {{ generatedAt }}</span>
+            </div>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-gray-100 text-gray-600 text-sm uppercase">
+                            <th class="p-3 border-b">Score</th>
+                            <th class="p-3 border-b">Role</th>
+                            <th class="p-3 border-b">Company</th>
+                            <th class="p-3 border-b">Location</th>
+                            <th class="p-3 border-b">Posted</th>
+                            <th class="p-3 border-b">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-sm divide-y">
+                        <tr v-for="job in jobs" :key="job.jobUrl" class="hover:bg-blue-50 transition">
+                            <td class="p-3 font-mono text-blue-600 font-bold">{{ job.relevanceScore }}</td>
+                            <td class="p-3 font-medium">{{ job.position }}</td>
+                            <td class="p-3 text-gray-600">{{ job.company }}</td>
+                            <td class="p-3 text-gray-500">{{ job.location }}</td>
+                            <td class="p-3 text-gray-500">{{ job.agoTime || job.date }}</td>
+                            <td class="p-3">
+                                <a :href="job.jobUrl" target="_blank" class="text-blue-600 hover:text-blue-800 underline">Apply</a>
+                            </td>
+                        </tr>
+                        <tr v-if="jobs.length === 0">
+                            <td colspan="6" class="p-8 text-center text-gray-500">
+                                No results found or data not yet generated.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
