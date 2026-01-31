@@ -3,7 +3,7 @@ const { createApp, ref, onMounted, watch, computed } = Vue;
 createApp({
     setup() {
         const pat = ref(localStorage.getItem('github_pat') || '');
-        const branch = ref(localStorage.getItem('github_branch') || 'master');
+        const branch = ref(localStorage.getItem('github_branch') || 'main');
         const loading = ref(false);
         const message = ref('');
         const msgType = ref('info');

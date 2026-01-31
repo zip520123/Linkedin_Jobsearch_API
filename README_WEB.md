@@ -25,7 +25,7 @@ git push origin main
 2. Click **Pages** (sidebar).
 3. Under **Build and deployment**:
    - Source: **Deploy from a branch**
-   - Branch: `master`
+   - Branch: `main`
    - Folder: `/docs` (Select `docs` from the dropdown, not root)
 4. Click **Save**.
 
