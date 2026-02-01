@@ -31,9 +31,10 @@ jobs:
           SEARCH_CONFIG: ${{ inputs.config }}
         run: node search-action.js
 
-      - name: Upload Results as Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: job-results
-          path: docs/data/
-          retention-days: 5
+      - name: Commit & Push Results
+        run: |
+          git config --global user.name 'JobSearchBot'
+          git config --global user.email 'bot@noreply.github.com'
+          git add docs/data/
+          git commit -m "Update job results [skip ci]" || echo "No changes"
+          git push origin main

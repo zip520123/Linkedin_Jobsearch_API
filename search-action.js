@@ -15,8 +15,14 @@ class CVBasedJobSearch {
     console.log(`   Location: ${searchConfig.location}`);
 
     try {
-      const jobs = await linkedIn.query(searchConfig);
-      console.log(`   ✅ Found ${jobs.length} jobs`);
+      // Ensure limit and page are numbers to avoid NaN issues in the library
+      const queryOptions = {
+        ...searchConfig,
+        limit: parseInt(searchConfig.limit) || 25,
+        page: 0
+      };
+      const jobs = await linkedIn.query(queryOptions);
+      console.log(`   ✅ Found ${jobs.length} raw jobs from LinkedIn`);
       return jobs;
     } catch (error) {
       console.error(`   ❌ Search failed: ${error.message}`);
@@ -25,13 +31,16 @@ class CVBasedJobSearch {
   }
 
   filterJobs(jobs, filters) {
+    if (!jobs) return [];
     return jobs.filter(job => {
-      // Filter by title keywords
+      const title = (job.position || '').toLowerCase();
+      
+      // Strict Title Filter: Job MUST contain one of these keywords
       if (filters.titleKeywords && filters.titleKeywords.length > 0) {
-        const hasKeyword = filters.titleKeywords.some(keyword =>
-          job.position.toLowerCase().includes(keyword.toLowerCase())
+        const hasRequiredKeyword = filters.titleKeywords.some(keyword =>
+          title.includes(keyword.toLowerCase())
         );
-        if (!hasKeyword) return false;
+        if (!hasRequiredKeyword) return false;
       }
 
       // Exclude companies
