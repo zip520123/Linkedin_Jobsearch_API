@@ -15,7 +15,7 @@ module.exports = {
       jobType: 'full time',
       remoteFilter: '',
       experienceLevel: 'senior',
-      limit: '25',
+      limit: '30',
       salary: ''
     },
     {
@@ -26,7 +26,7 @@ module.exports = {
       jobType: 'full time',
       remoteFilter: '',
       experienceLevel: 'senior',
-      limit: '25',
+      limit: '30',
       salary: ''
     },
 
@@ -39,7 +39,7 @@ module.exports = {
       jobType: 'full time',
       remoteFilter: '',
       experienceLevel: 'senior',
-      limit: '25',
+      limit: '30',
       salary: ''
     },
     {
@@ -50,7 +50,7 @@ module.exports = {
       jobType: 'full time',
       remoteFilter: '',
       experienceLevel: 'senior',
-      limit: '25',
+      limit: '30',
       salary: ''
     },
 
@@ -63,7 +63,7 @@ module.exports = {
       jobType: 'full time',
       remoteFilter: '',
       experienceLevel: 'senior',
-      limit: '25',
+      limit: '30',
       salary: ''
     },
     {
@@ -74,7 +74,7 @@ module.exports = {
       jobType: 'full time',
       remoteFilter: '',
       experienceLevel: 'senior',
-      limit: '25',
+      limit: '30',
       salary: ''
     },
 
@@ -87,7 +87,7 @@ module.exports = {
       jobType: 'full time',
       remoteFilter: '',
       experienceLevel: 'senior',
-      limit: '25',
+      limit: '30',
       salary: ''
     },
     {
@@ -98,7 +98,7 @@ module.exports = {
       jobType: 'full time',
       remoteFilter: '',
       experienceLevel: 'senior',
-      limit: '25',
+      limit: '30',
       salary: ''
     },
 
@@ -111,7 +111,7 @@ module.exports = {
       jobType: 'full time',
       remoteFilter: '',
       experienceLevel: 'senior',
-      limit: '25',
+      limit: '30',
       salary: ''
     },
     {
@@ -122,7 +122,7 @@ module.exports = {
       jobType: 'full time',
       remoteFilter: '',
       experienceLevel: 'senior',
-      limit: '25',
+      limit: '30',
       salary: ''
     },
 
@@ -135,7 +135,7 @@ module.exports = {
     //   jobType: 'full time',
     //   remoteFilter: '',
     //   experienceLevel: 'senior',
-    //   limit: '25',
+    //   limit: '30',
     //   salary: ''
     // },
     // {
@@ -146,7 +146,7 @@ module.exports = {
     //   jobType: 'full time',
     //   remoteFilter: '',
     //   experienceLevel: 'senior',
-    //   limit: '25',
+    //   limit: '30',
     //   salary: ''
     // },
     // {
@@ -157,7 +157,7 @@ module.exports = {
     //   jobType: 'full time',
     //   remoteFilter: '',
     //   experienceLevel: 'senior',
-    //   limit: '25',
+    //   limit: '30',
     //   salary: ''
     // },
 
@@ -170,7 +170,7 @@ module.exports = {
       jobType: 'full time',
       remoteFilter: '',
       experienceLevel: 'senior',
-      limit: '25',
+      limit: '30',
       salary: ''
     },
     {
@@ -181,7 +181,7 @@ module.exports = {
       jobType: 'full time',
       remoteFilter: '',
       experienceLevel: 'senior',
-      limit: '25',
+      limit: '30',
       salary: ''
     }
   ],
